@@ -29,6 +29,9 @@ jobs:
       - name: Run formatter
         run: pnpm format
 
+      - name: Run linter
+        run: pnpm lint
+
       - name: Run unit tests
         run: pnpm test
 
