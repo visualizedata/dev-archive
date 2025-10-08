@@ -1,0 +1,252 @@
+---
+import { getCollection, render } from 'astro:content'
+import type { ProjectData } from '@/content.config'
+import MainLayout from '@/layouts/MainLayout.astro'
+import { ProjectCard } from '@/components/ProjectCard'
+import { VideoPlayer } from '@/components/VideoPlayer'
+import { RelatedProjects } from '@/components/RelatedProjects'
+import { AuthorProjects } from '@/components/AuthorProjects'
+
+// 1. Generate a new path for every collection entry
+export async function getStaticPaths() {
+  const projects = await getCollection('projects')
+  return projects.map((project) => ({
+    params: { id: project.id },
+    props: { project },
+  }))
+}
+
+const { project } = Astro.props
+const { Content } = await render(project)
+
+// Get all projects for client-side filtering
+const allProjects = await getCollection('projects')
+
+// Get filtered projects for initial render
+const filteredRelatedProjects = allProjects
+  .filter(
+    (p) =>
+      p.id !== project.id &&
+      p.data.year === project.data.year &&
+      p.data.category?.some((cat) =>
+        project.data.category?.includes(cat)
+      ) &&
+      !p.data.author?.some((author) =>
+        project.data.author?.includes(author)
+      )
+  )
+  .map(p => ({
+    id: p.id,
+    ...p.data
+  }))
+
+const filteredTagProjects = allProjects
+  .filter(
+    (p) =>
+      p.id !== project.id &&
+      p.data.tags?.some((tag) => project.data.tags?.includes(tag))
+  )
+  .map(p => ({
+    id: p.id,
+    ...p.data
+  }))
+
+// Get other projects by the same author(s)
+const filteredAuthorProjects = allProjects
+  .filter(
+    (p) =>
+      p.id !== project.id &&
+      p.data.author?.some((author) => project.data.author?.includes(author))
+  )
+  .map(p => ({
+    id: p.id,
+    ...p.data
+  }))
+---
+
+<MainLayout>
+  <main class="max-w-7xl mx-auto">
+    <article class="space-y-8">
+      {/* Header Section */}
+      <header class="space-y-4">
+        <h1
+          class="text-5xl font-neue-display-random max-w-[40ch] text-balance"
+        >
+          {project.data.title}
+        </h1>
+        {
+          project.data.author && project.data.author.length > 0 && (
+            <div>by {project.data.author.join(', ')}</div>
+          )
+        }
+      </header>
+
+      {/* Video Section */}
+      {
+        project.data.video && project.data.video.length > 0 && (
+          <div class="w-full aspect-video">
+            <VideoPlayer
+              client:load
+              src={project.data.video[0]}
+              title={project.data.title}
+              poster={
+                project.data.image?.[0]
+                  ? `/images/${project.data.image[0]}`
+                  : undefined
+              }
+            />
+          </div>
+        )
+      }
+
+
+      {
+        project.data.description && (
+          <div>
+            {project.data.description.split('\n').map((text) => {
+              return (
+                <p class="text-base max-w-prose pb-4 last:pb-0">{text}</p>
+              )
+            })}
+          </div>
+        )
+      }
+
+      {/* Tags and Categories Section */}
+      <div class="space-y-4">
+        {/* Categories */}
+        {
+          project.data.category && project.data.category.length > 0 && (
+            <div class="space-y-2">
+              <h3 class="text-sm font-medium text-neutral-600">Categories</h3>
+              <div class="flex flex-wrap gap-2">
+                {project.data.category.map((category) => (
+                  <a
+                    href={`/?category=${encodeURIComponent(category)}`}
+                    class="px-4 py-1.5 bg-blue-50 text-blue-700 rounded-full text-sm font-medium border border-blue-100 hover:bg-blue-100 transition-colors"
+                  >
+                    {category}
+                  </a>
+                ))}
+              </div>
+            </div>
+          )
+        }
+
+        {/* Tags */}
+        {
+          project.data.tags && project.data.tags.length > 0 && (
+            <div class="space-y-2">
+              <h3 class="text-sm font-medium text-neutral-600">Tags</h3>
+              <div class="flex flex-wrap gap-2">
+                {project.data.tags.map((tag) => (
+                  <a
+                    href={`/?tags=${encodeURIComponent(tag)}`}
+                    class="px-3 py-1 bg-neutral-50 text-neutral-700 rounded-full text-sm border border-neutral-200 hover:bg-neutral-100 transition-colors"
+                  >
+                    {tag}
+                  </a>
+                ))}
+              </div>
+            </div>
+          )
+        }
+      </div>
+
+      {/* Images Section */}
+      {
+        project.data.image && project.data.image.length > 0 && (project.data.video.length < 1) && (
+          <div class="grid grid-cols-1 gap-4">
+            {project.data.image.map((img) => (
+              <img
+                src={`/images/${img}`}
+                alt={`${project.data.title} project image`}
+                class="w-full h-auto rounded-lg object-cover [box-shadow:0_0_0_1px_rgba(0,0,0,0.1)]"
+              />
+            ))}
+          </div>
+        )
+      }
+
+      {/* Links Section */}
+      {
+        (project.data.project_url ||
+          project.data.project_repo ||
+          project.data.student_url) && (
+          <div class="border-t pt-6 border-neutral-300">
+            <h2 class="text-xl font-semibold mb-4">Links</h2>
+            <ul class="space-y-2">
+              {project.data.project_url && (
+                <li>
+                  <a
+                    href={project.data.project_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-blue-600 hover:underline"
+                  >
+                    Project Website
+                  </a>
+                </li>
+              )}
+              {project.data.project_repo && (
+                <li>
+                  <a
+                    href={project.data.project_repo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-blue-600 hover:underline"
+                  >
+                    Project Repository
+                  </a>
+                </li>
+              )}
+              {project.data.student_url && (
+                <li>
+                  <a
+                    href={project.data.student_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-blue-600 hover:underline"
+                  >
+                    Student Portfolio
+                  </a>
+                </li>
+              )}
+            </ul>
+          </div>
+        )
+      }
+
+      {/* Other Projects by Author Section */}
+      <RelatedProjects
+        client:load
+        currentProject={{
+          id: project.id,
+          ...project.data
+        }}
+        filteredProjects={filteredAuthorProjects}
+        title={`More projects by ${project.data.author?.join(', ')}`}
+      />
+
+      <RelatedProjects
+        client:load
+        currentProject={{
+          id: project.id,
+          ...project.data
+        }}
+        filteredProjects={filteredRelatedProjects}
+        title={`More ${project.data.category?.join(', ')} projects from ${project.data.year}`}
+      />
+
+      <RelatedProjects
+        client:load
+        currentProject={{
+          id: project.id,
+          ...project.data
+        }}
+        filteredProjects={filteredTagProjects}
+        title="More projects with similar tags"
+      />
+    </article>
+  </main>
+</MainLayout>

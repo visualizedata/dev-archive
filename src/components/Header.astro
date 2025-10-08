@@ -1,0 +1,61 @@
+---
+type Props = {
+  description?: string;
+}
+
+const { description } = Astro.props;
+---
+
+<div class="mb-4 sm:my-2.5">
+  <div class="flex w-full border-b-3 border-black">
+    <span class="font-neue-display-random text-[1.5em] leading-[1em]">The New School</span>
+  </div>
+
+  <div class="flex w-full">
+    <div class="mt-[3px] w-[10%] inline-block border-t-3 border-black sm:w-0" />
+    <div>
+      <span class="font-neue-display-random text-tns-red leading-none pt-2 pb-2 text-[2.5em] no-underline flex text-left sm:text-[1.5em] sm:mt-1"> Data Visualization </span>
+      <div class="font-neue-display-random text-[1em] text-black text-left leading-0 sm:leading-[1em]">Thesis Projects And Research</div>
+    </div>
+  </div>
+
+  {description && (
+    <div class="flex w-full">
+      <div class="font-neue-regular flex-grow text-[1.5em] font-medium text-black text-left py-[25px] pl-[10%] border-b-3 border-black sm:text-[1em] sm:py-[15px] sm:pl-0">
+        {description}
+      </div>
+    </div>
+  )}
+</div>
+
+<script>
+export default {
+  name: 'SiteHeader',
+}
+</script>
+
+<style>
+@media (max-width: 399px) {
+  .header {
+    margin: 10px 0;
+  }
+
+  .title-dv {
+    font-size: 1.5em;
+    margin-top: 5px;
+  }
+
+  .title-thesis {
+    line-height: 1em;
+  }
+
+  .section-border-top {
+    width: 0;
+  }
+
+  .body-description {
+    font-size: 1em;
+    padding: 15px 0px;
+  }
+}
+</style>

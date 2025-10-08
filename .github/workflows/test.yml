@@ -1,0 +1,39 @@
+name: Test
+on:
+  push:
+    branches: [ in-progress ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    # Run all steps inside a Node Docker container—no Actions caching at all
+    container:
+      image: node:18
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Verify Node version
+        run: node --version
+
+      - name: Install pnpm
+        run: npm install -g pnpm@latest
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run formatter
+        run: pnpm format
+
+      - name: Run linter
+        run: pnpm lint
+
+      - name: Run unit tests
+        run: pnpm test
+
+      - name: Build assets
+        run: pnpm build

@@ -1,0 +1,30 @@
+{
+  "year": 2023,
+  "title": "2023 Keynotes",
+  "department": "MS Data Visualization",
+  "description": "",
+
+  "location": "Arnold Hall",
+  "date": "2023-05-13",
+  "time": "6:00PM",
+  "url": "",
+
+  "students": [
+    "Isabel Bonnet Belloso",
+    "Stephanie Dang",
+    "Angelica Hom",
+    "Hao Lun Hung",
+    "Tatiana Lahera Kalainoff",
+    "Asad Ahmad Khan",
+    "Jooyoung Lee",
+    "Tina Titus Mathew",
+    "Tanishia Lavette Williams Peterson",
+    "Huong Pham",
+    "Alix Marissa Scherer",
+    "Ladfah Suwichacherdchu",
+    "Chay Thawaranont",
+    "Zora Wan",
+    "Shuyao Xiao"
+  ],
+  "video_embed_html": "<iframe src=\"https://player.vimeo.com/video/1102070384?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479\" frameborder=\"0\" allow=\"autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" title=\"2023 MS Data Visualization Keynotes | Parsons at The New School\"></iframe>"
+}

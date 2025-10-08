@@ -1,0 +1,44 @@
+{
+  "name": "thesis",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "format": "prettier --write ./src/**/*.{js,cjs,mjs,json,tsx,ts,json}",
+    "lint": "eslint {app,scripts}/*.{js,mjs,vue}",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@astrojs/react": "^4.3.0",
+    "@radix-ui/react-checkbox": "^1.3.2",
+    "@radix-ui/react-icons": "^1.3.2",
+    "@radix-ui/react-label": "^2.1.7",
+    "@radix-ui/react-select": "^2.2.5",
+    "@tailwindcss/vite": "^4.1.8",
+    "@types/jest": "^28.1.8",
+    "@types/react": "^19.1.6",
+    "@types/react-dom": "^19.1.5",
+    "@vidstack/react": "^1.12.13",
+    "astro": "^5.8.1",
+    "d3-array": "^3.2.4",
+    "d3-brush": "^3.0.0",
+    "d3-scale": "^4.0.2",
+    "d3-selection": "^3.0.0",
+    "fast-glob": "^3.3.2",
+    "fuse.js": "^6.6.2",
+    "lucide-react": "^0.514.0",
+    "motion": "^12.16.0",
+    "prettier": "^2.8.8",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "tailwindcss": "^4.1.8"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}
