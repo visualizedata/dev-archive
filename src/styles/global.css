@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+	--font-sans: "InterVariable", sans-serif;
+	--font-mono: "Fira Mono", monospace;
+	--font-neue-regular: "neue-regular", sans-serif;
+	--font-neue-display-black: "neue-display-black", sans-serif;
+	--font-neue-display-random: "neue-display-random", sans-serif;
+	--font-neue-display-ultra: "neue-display-ultra", sans-serif;
+	--font-neue-display-wide: "neue-display-wide", sans-serif;
+
+	--color-tns-red: #e82e21;
+	--color-background: var(--background, #fff);
+	--color-text: var(--text, #000);
+
+	--width-container: 90rem;
+}

@@ -1,0 +1,32 @@
+{
+  "year": 2025,
+  "title": "2025 Keynotes",
+  "department": "MS Data Visualization",
+  "description": "",
+
+  "location": "",
+  "date": "",
+  "time": "",
+  "url": "",
+
+  "students": [
+    "Lisa Quinley",
+    "Tak Watanabe",
+    "Josh Strupp",
+    "Bella Kwon",
+    "Daia Bromberg",
+    "Monsicha Srisuantang",
+    "Xuan Tan",
+    "Harshita Chakravadhanula",
+    "Nour Al Safadi",
+    "Katherine Chui",
+    "Annie Lee",
+    "Ian Yu",
+    "Eva Lucy Alvarado",
+    "Sani Sharma",
+    "Ani Matevosian",
+    "Sophie Graves",
+    "Steph Wu"
+  ],
+  "video_embed_html": "<iframe src=\"https://player.vimeo.com/video/1102333444?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479\" frameborder=\"0\" allow=\"autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" title=\"2025 MS Data Visualization Keynotes | Parsons at The New School\"></iframe>"
+}
